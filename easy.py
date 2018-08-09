@@ -12,4 +12,4 @@ def list_dir():        #содержимое текущей директории
     print(os.listdir(os.getcwd()))
 
 def change_dir(dir_name):                       # смена директории
-    os.chdir(path)
+    os.chdir(dir_name)
