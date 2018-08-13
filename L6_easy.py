@@ -60,21 +60,22 @@ class Trapezoid:
         return [a, b, c, d]
 
     def is_trap(self):
-        if self.sides([1]) == self.sides([3]):
+        if self.sides()[1] == self.sides()[3]:
             return 'Трапеция является равнобедренной'
         else:
             return 'Трапеция не является равнобедренной'
 
     def perimeter(self):
         per = sum(self.sides())
-        return per
+        return round(per,2)
 
     def area(self):#площадь трапеции считаем по 4 сторонам
-        a = Trapezoid.sides([0])
-        b = Trapezoid.sides([1])
-        c = Trapezoid.sides([2])
-        d = Trapezoid.sides([3])
-        S = ((a + b) / 2) * math.sqrt((d ** 2) - ((((a - c) ** 2) + (d ** 2) - (b ** 2) / (2 * (a - c)))))
+        a = self.sides()[0]
+        b = self.sides()[1]
+        c = self.sides()[2]
+        d = self.sides()[3]
+        S = round(((a + c) / 2) * math.sqrt((d ** 2) - ((((a - c) ** 2) +
+            (d ** 2) - (b ** 2)) / (2 * (a - c)))**2),2)
         return S
 trap1 = Trapezoid (0,0,6,0,4,4,2,4)
-print('Длины сторон {}, периметр {}, площадь [}'.format(trap1.sides(), trap1.perimeter(), trap1.area()))
+print('Длины сторон {}, периметр {}, площадь {}'.format(trap1.sides(), trap1.perimeter(), trap1.area()))
