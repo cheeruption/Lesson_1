@@ -1,12 +1,28 @@
-from urllib.request import urlopen
+import requests
 import sqlite3
 import os
 import sys
 import json
 
+conn = sqlite3.connect('pogoda.db')
+c = conn.cursor()
+from urllib.request import urlopen
+
+cities1 = json.load(open('files/city.list.json'))
+print(cities1[0])
+app_id = open('files/app_id.txt', 'r').read()
+print(app_id)
+cities = '524901'
+url = "http://api.openweathermap.org/data/2.5/weather?id={}&units=metric&appid={}".format(city_id, app_id)
+print(url)
+pogoda = urlopen(url)
+pogoda = json.load(pogoda)
+print(pogoda)
+# запрос по нескольким городам city1,city2,city3 в url
+
 def get_city(city):
     a = {}
-    with open('files/city_list.json', 'r', encoding='utf-8') as fh:
+    with open('city_list.json', 'r', encoding='utf-8') as fh:
         cities = json.load(fh)
     for item in cities:
         if city in item.values():
@@ -21,7 +37,7 @@ a.close()  # закрываем файл с ключом
 
 try:  # Проверим, есть ли город в базе
     inquiry = urlopen(url)  # Отправим запрос на получение данных
-    data = json.load(inquiry)  # Сохраним полученные данные (принимаем формат json())
+    data = inquiry.json()  # Сохраним полученные данные (принимаем формат json())
     print("В {} сейчас {} градусов".format(data["name"], data["main"]["temp"]))  # по ключам вытаскиваем из json файла значения
 except:
     sys.exit("Такого города нет в базе!")
@@ -40,8 +56,7 @@ if save_data.lower() == "y":
     conn.commit()
     c.close()
     conn.close()
-    print("Город в базе данных pogoda.db создан!")
+    print("Город в базе данных cities.db создан!")
 else:
     print("Хорошо, создавать БД не будем.")
-
 
