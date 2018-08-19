@@ -6,7 +6,7 @@ import json
 
 def get_city(city):
     a = {}
-    with open('city_list.json', 'r', encoding='utf-8') as fh:
+    with open('files/city_list.json', 'r', encoding='utf-8') as fh:
         cities = json.load(fh)
     for item in cities:
         if city in item.values():
@@ -40,7 +40,7 @@ if save_data.lower() == "y":
     conn.commit()
     c.close()
     conn.close()
-    print("Город в базе данных cities.db создан!")
+    print("Город в базе данных pogoda.db создан!")
 else:
     print("Хорошо, создавать БД не будем.")
 
