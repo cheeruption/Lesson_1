@@ -1,2 +1,2 @@
 # Python_happiness
-Репозиторий с домашними заданиями к курсу geekbrains python
+Репозиторий с домашними заданиями к курсу geekbrains python.
